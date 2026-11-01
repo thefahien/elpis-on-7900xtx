@@ -72,6 +72,27 @@ Caveats: greedy is deterministic, so its spread is near zero, while sampled runs
 and the spread is the real variation; each reply is cut at 1024 tokens, so thinking-on rows measure the start of
 the reasoning trace, not a full answer; n=6 per cell.
 
+**Same-session comparison with llama.cpp (greedy and sampled):** the same `bench/sampled.py` run against llama.cpp on the
+same card, same prompts, 1024-token replies, 6 rounds, 108 requests, 0 errors. llama.cpp is the Vulkan build serving
+`Swift-1.5-Qwen3.8-27B-GSQ-RCO-IQ3_S-mtp.gguf` (a Qwen3.8-27B derivative at IQ3_S, about 3.55 bits/weight, MTP
+draft, 1 slot), not the same weights as elpis (4.00 bpw EXL3), so this is "what the card did before", not a strict
+A/B. Raw data:
+[`results/llamacpp-vulkan-swift1.5_sampled.jsonl`](results/llamacpp-vulkan-swift1.5_sampled.jsonl).
+
+| tok/s (median of 6) | llama.cpp greedy / T=0.6 / T=1.0 | elpis greedy / T=0.6 / T=1.0 | elpis vs llama.cpp |
+|---|---|---|---|
+| code, thinking on | 73 / 74 / 74 | 107 / 113 / 96 | 1.5x / 1.5x / 1.3x |
+| math, thinking on | 74 / 74 / 72 | 114 / 114 / 99 | 1.6x / 1.5x / 1.4x |
+| prose, thinking on | 70 / 69 / 67 | 77 / 86 / 85 | 1.1x / 1.3x / 1.3x |
+| code, thinking off | 85 / 87 / 85 | 178 / 181 / 179 | 2.1x at all three |
+| math, thinking off | 83 / 83 / 81 | 150 / 152 / 149 | 1.8x at all three |
+| prose, thinking off | 64 / 63 / 60 | 76 / 70 / 69 | 1.2x / 1.1x / 1.2x |
+
+llama.cpp barely moves with sampling (within 1-3 tok/s), so the sampled gap to elpis is about the same as the greedy
+gap: thinking-on 1.3-1.6x on code and math (1.1-1.3x on prose), thinking-off 1.8-2.1x on code and math. The earlier
+table's llama.cpp column (78 / 74 / 65 etc.) was a separate 512-token run on a different GGUF, so it differs by a few
+tok/s from this one.
+
 **Context:** 131072 tokens with Q8 KV. Peak VRAM 22.45 GiB with a 122k-token prompt; a needle-in-a-haystack
 question at 122k was answered correctly ([`bench/needle.py`](bench/needle.py)). 192k does not fit with the
 4.00bpw weights (the port's 192k profile is for its 3.5bpw model). There is no 3-bit KV cache on ROCm yet (the

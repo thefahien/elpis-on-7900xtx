@@ -1,0 +1,20 @@
+[Unit]
+Description=elpis-xtx: TabbyAPI + exllamav3-rocm, Qwen3.8-27B EXL3 4.00bpw + DFlash2
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/elpis-xtx/tabbyAPI
+Environment=HIP_VISIBLE_DEVICES=0
+Environment=OMP_NUM_THREADS=8
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/bin/bash -c 'source /opt/elpis-xtx/venv/bin/activate && exec /opt/elpis-xtx/exllamav3-rocm/rocm/scripts/run_tabbyapi.sh /opt/elpis-xtx/tabbyAPI/config.elpis-xtx.yml /opt/elpis-xtx/tabbyAPI'
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=30
+# Cold load takes 3-4 min (weights + kernel warm-up); resident host RAM ~10 GB.
+MemoryMax=17G
+
+[Install]
+WantedBy=multi-user.target

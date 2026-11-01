@@ -1,0 +1,71 @@
+{
+ "label": "7900xtx-exl3rocm_think_402W",
+ "runs": {
+  "code": {
+   "reps": [
+    {
+     "s": 5.67,
+     "ct": 512,
+     "tok_s": 90.4,
+     "server_decode_tok_s": 94.72,
+     "accepted": 350,
+     "rejected": 784
+    },
+    {
+     "s": 5.73,
+     "ct": 512,
+     "tok_s": 89.4,
+     "server_decode_tok_s": 93.63,
+     "accepted": 350,
+     "rejected": 784
+    }
+   ],
+   "best": 90.4,
+   "sample": "We need answer user: \"Write a Python class LRUCache with get(key) and put(key, value) in O(1) using a dict and a doubly linked list, no OrderedDict. Include type hints, docstrings, and five pytest tests.\"\n\nNeed produce final code likely with class and tests. Need ensure O(1), dict and doubly linked "
+  },
+  "math": {
+   "reps": [
+    {
+     "s": 4.41,
+     "ct": 512,
+     "tok_s": 116.1,
+     "server_decode_tok_s": 123.71,
+     "accepted": 389,
+     "rejected": 472
+    },
+    {
+     "s": 4.4,
+     "ct": 512,
+     "tok_s": 116.5,
+     "server_decode_tok_s": 124.41,
+     "accepted": 389,
+     "rejected": 472
+    }
+   ],
+   "best": 116.5,
+   "sample": "We need answer math problem step by step. Need solve. Let's parse: pens at 3 for $4. Priya buys 18 pens and some notebooks at $2.50 each. Pays with two $50 notes = $100, gets $43 change. So total spent = 100 - 43 = 57. Pens cost: 18 pens at 3 for $4 => 18/3=6 sets * $4 = $24. Notebooks cost = 57 - 2"
+  },
+  "prose": {
+   "reps": [
+    {
+     "s": 7.27,
+     "ct": 512,
+     "tok_s": 70.4,
+     "server_decode_tok_s": 72.7,
+     "accepted": 302,
+     "rejected": 1168
+    },
+    {
+     "s": 7.36,
+     "ct": 512,
+     "tok_s": 69.6,
+     "server_decode_tok_s": 71.99,
+     "accepted": 302,
+     "rejected": 1168
+    }
+   ],
+   "best": 70.4,
+   "sample": "We need to write a 400-word short story about a lighthouse keeper who discovers that the light has been signalling to someone on the other side of the sea for years. Need produce final story exactly? User says 400-word short story. Need likely aim exactly 400 words? We should count. Need craft story"
+  }
+ }
+}

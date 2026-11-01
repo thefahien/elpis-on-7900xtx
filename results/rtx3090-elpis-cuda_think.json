@@ -1,0 +1,71 @@
+{
+ "label": "rtx3090-elpis-cuda_think",
+ "runs": {
+  "code": {
+   "reps": [
+    {
+     "s": 3.69,
+     "ct": 512,
+     "tok_s": 138.6,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 3.64,
+     "ct": 512,
+     "tok_s": 140.7,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 140.7,
+   "sample": "We need answer user: \"Write a Python class LRUCache with get(key) and put(key, value) in O(1) using a dict and a doubly linked list, no OrderedDict. Include type hints, docstrings, and five pytest tests.\"\n\nNeed produce final code likely with class and tests. Need ensure O(1), dict and doubly linked "
+  },
+  "math": {
+   "reps": [
+    {
+     "s": 2.97,
+     "ct": 512,
+     "tok_s": 172.1,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 2.99,
+     "ct": 512,
+     "tok_s": 171.1,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 172.1,
+   "sample": "We need answer math problem step by step. Need solve. Let's parse: pens at 3 for $4. Priya buys 18 pens and some notebooks at $2.50 each. Pays with two $50 notes = $100, gets $43 change. So total spent = 100 - 43 = $57. Cost pens: 18 pens at 3 for $4. 18/3=6 sets, cost 6*4=$24. Notebooks cost = 57-2"
+  },
+  "prose": {
+   "reps": [
+    {
+     "s": 3.94,
+     "ct": 512,
+     "tok_s": 130.0,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 3.96,
+     "ct": 512,
+     "tok_s": 129.2,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 130.0,
+   "sample": "We need answer user's request: \"Write a 400-word short story about a lighthouse keeper who discovers that the light has been signalling to someone on the other side of the sea for years.\"\n\nNeed produce final story exactly? 400-word short story. Need likely exactly 400 words? User says 400-word short"
+  }
+ }
+}

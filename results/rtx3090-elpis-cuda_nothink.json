@@ -1,0 +1,85 @@
+{
+ "label": "rtx3090-elpis-cuda_nothink",
+ "runs": {
+  "code": {
+   "reps": [
+    {
+     "s": 2.12,
+     "ct": 512,
+     "tok_s": 241.3,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 2.13,
+     "ct": 512,
+     "tok_s": 240.4,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 241.3,
+   "sample": "```python\n\"\"\"LRU Cache implementation using a dictionary and a doubly linked list.\"\"\"\n\nfrom typing import Optional\n\n\nclass _Node:\n    \"\"\"A node in the doubly linked list.\"\"\"\n\n    __slots__ = (\"key\", \"value\", \"prev\", \"next\")\n\n    def __init__(self, key: int, value: int) -> None:\n        self.key = ke"
+  },
+  "math": {
+   "reps": [
+    {
+     "s": 2.24,
+     "ct": 512,
+     "tok_s": 228.5,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 2.23,
+     "ct": 512,
+     "tok_s": 229.4,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 229.4,
+   "sample": "Here is the step-by-step solution to the problem.\n\n### Step 1: Determine the total amount spent\nPriya paid with two $\\$50$ notes and received $\\$43$ in change. We can calculate the total amount she actually spent by subtracting the change from the total payment.\n\n$$ \\text{Total Payment} = 2 \\times \\"
+  },
+  "prose": {
+   "reps": [
+    {
+     "s": 4.53,
+     "ct": 512,
+     "tok_s": 113.0,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    },
+    {
+     "s": 4.53,
+     "ct": 512,
+     "tok_s": 113.0,
+     "server_decode_tok_s": null,
+     "accepted": null,
+     "rejected": null
+    }
+   ],
+   "best": 113.0,
+   "sample": "The fog rolled in thick and gray, swallowing the cliffs of Cape Aethelgard whole. Elias, the lighthouse keeper, wiped the condensation from the great Fresnel lens with a rag that had long since lost its whiteness. He was sixty years old, his joints stiff with the damp cold, and he had kept this ligh"
+  }
+ },
+ "prefill": {
+  "prompt_tokens": 51450,
+  "s": 37.95,
+  "tok_s": 1355.8,
+  "server_prompt_tok_s": null
+ },
+ "long_decode": {
+  "prompt_tokens": 51450,
+  "s": 1.26,
+  "ct": 99,
+  "tok_s_whole": 78.7,
+  "server_decode_tok_s": null,
+  "cached": 51200
+ }
+}

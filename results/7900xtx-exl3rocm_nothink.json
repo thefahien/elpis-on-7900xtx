@@ -1,0 +1,71 @@
+{
+ "label": "7900xtx-exl3rocm_nothink",
+ "runs": {
+  "code": {
+   "reps": [
+    {
+     "s": 3.02,
+     "ct": 512,
+     "tok_s": 169.8,
+     "server_decode_tok_s": 180.63,
+     "accepted": 430,
+     "rejected": 144
+    },
+    {
+     "s": 3.01,
+     "ct": 512,
+     "tok_s": 170.3,
+     "server_decode_tok_s": 181.23,
+     "accepted": 430,
+     "rejected": 144
+    }
+   ],
+   "best": 170.3,
+   "sample": "```python\n\"\"\"LRU Cache implementation using a dictionary and a doubly linked list.\"\"\"\n\nfrom typing import Optional\n\n\nclass _Node:\n    \"\"\"A node in the doubly linked list.\"\"\"\n\n    __slots__ = (\"key\", \"value\", \"prev\", \"next\")\n\n    def __init__(self, key: int, value: int) -> None:\n        self.key = ke"
+  },
+  "math": {
+   "reps": [
+    {
+     "s": 5.35,
+     "ct": 512,
+     "tok_s": 95.6,
+     "server_decode_tok_s": 167.2,
+     "accepted": 423,
+     "rejected": 200
+    },
+    {
+     "s": 3.37,
+     "ct": 512,
+     "tok_s": 151.9,
+     "server_decode_tok_s": 162.57,
+     "accepted": 423,
+     "rejected": 200
+    }
+   ],
+   "best": 151.9,
+   "sample": "Here is the step-by-step solution to the problem.\n\n### Step 1: Determine the total amount spent\nPriya paid with two $\\$50$ notes and received $\\$43$ in change. We can calculate the total amount she actually spent by subtracting the change from the total payment.\n\n$$ \\text{Total Payment} = 2 \\times \\"
+  },
+  "prose": {
+   "reps": [
+    {
+     "s": 7.14,
+     "ct": 512,
+     "tok_s": 71.7,
+     "server_decode_tok_s": 73.42,
+     "accepted": 313,
+     "rejected": 1080
+    },
+    {
+     "s": 7.16,
+     "ct": 512,
+     "tok_s": 71.5,
+     "server_decode_tok_s": 72.85,
+     "accepted": 313,
+     "rejected": 1080
+    }
+   ],
+   "best": 71.7,
+   "sample": "The fog rolled in thick and gray, swallowing the cliffs of Cape Aethelgard whole. Elias, the lighthouse keeper, wiped the condensation from the great lens with a rag that had long since lost its whiteness. He had kept the light for thirty years, a solitary sentinel against the dark. His father had k"
+  }
+ }
+}

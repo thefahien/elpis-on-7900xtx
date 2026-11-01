@@ -1,0 +1,23 @@
+diff --git a/exllamav3/modules/arch_specific/dflash2.py b/exllamav3/modules/arch_specific/dflash2.py
+index 7230e77..481c438 100644
+--- a/exllamav3/modules/arch_specific/dflash2.py
++++ b/exllamav3/modules/arch_specific/dflash2.py
+@@ -281,10 +281,14 @@ class DFlash2Selector(Module):
+     @override
+     def load(self, device: torch.device, **kwargs):
+         super().load(device, **kwargs)
+-        self.pred_codebook = self.config.stc.get_tensor(
+-            self.key_pred, self.device, optional = False, allow_bf16 = True)
+-        self.succ_codebook = self.config.stc.get_tensor(
+-            self.key_succ, self.device, optional = False, allow_bf16 = True)
++        def _codebook(key):
++            # elpis/r0b0tlab drafts save the codebooks as nn.Embedding (<key>.weight)
++            t = self.config.stc.get_tensor(key, self.device, optional = True, allow_bf16 = True)
++            if t is None:
++                t = self.config.stc.get_tensor(key + ".weight", self.device, optional = False, allow_bf16 = True)
++            return t
++        self.pred_codebook = _codebook(self.key_pred)
++        self.succ_codebook = _codebook(self.key_succ)
+         expected_shape = (self.vocab_size, self.rank)
+         if self.pred_codebook.shape != expected_shape:
+             raise ValueError(

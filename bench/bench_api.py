@@ -20,12 +20,13 @@ PROMPTS = {
 
 
 NOTHINK = False
+SAMPLING = {"temperature": 0.0}   # soak/sampled.py override this; default stays greedy
 
 
 def call(base, key, model, messages, max_tokens, timeout=900):
     """Streaming request with include_usage; returns wall s, prompt tok, completion tok, text, usage."""
-    body = {"model": model, "messages": messages, "max_tokens": max_tokens, "temperature": 0.0,
-            "stream": True, "stream_options": {"include_usage": True}}
+    body = {"model": model, "messages": messages, "max_tokens": max_tokens,
+            "stream": True, "stream_options": {"include_usage": True}, **SAMPLING}
     if NOTHINK:
         body["chat_template_kwargs"] = {"enable_thinking": False}
     req = urllib.request.Request(base.rstrip("/") + "/v1/chat/completions", data=json.dumps(body).encode(),

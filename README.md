@@ -44,6 +44,34 @@ Our numbers match the port's own README (it reports 135 code / 72 prose with its
 Peaks: junction 81 °C, memory 95 °C, 334 W. Memory at 95 °C is close to GDDR6 throttling; it held flat, but
 check yours if your case runs hot.
 
+**Sampled decoding (greedy vs temperature):** the numbers above are greedy. Same card, same session, same prompts,
+1024-token replies, 6 rounds interleaved (greedy / T=0.6 / T=1.0 back to back, so thermals hit all three equally),
+108 requests, 0 errors. Sampling is real on this server (identical requests give different text) and `top_k` is
+accepted. Median whole-request tok/s; "draft accept" is accepted / (accepted + rejected) draft tokens from the
+server's usage counters, summed over the 6 runs. Raw data:
+[`results/7900xtx-exl3rocm_sampled.jsonl`](results/7900xtx-exl3rocm_sampled.jsonl), script:
+[`bench/sampled.py`](bench/sampled.py).
+
+| tok/s (median of 6) | greedy | T=0.6, top_p 0.95, top_k 20 | T=1.0, top_p 0.95, top_k 20 |
+|---|---|---|---|
+| code, thinking on | 107 | 113 | **96** |
+| math, thinking on | 114 | 114 | **99** |
+| prose, thinking on | 77 | 86 | 85 |
+| code, thinking off | 178 | 181 | 179 |
+| math, thinking off | 150 | 152 | 149 |
+| prose, thinking off | 76 | 70 | 69 |
+
+Draft accept, thinking on: code 40% / 44% / 35%, math 44% / 44% / 37%, prose 24% / 30% / 28% (greedy / T=0.6 / T=1.0).
+Thinking off: code 76-77% at all three, math 60-62%, prose 20-24%.
+
+Reading it: at the recommended T=0.6 the speed is the same as greedy within run-to-run spread (code and math thinking
+on: -0% to +6%; one run in six reached 131 on code). At T=1.0 the thinking-on code and math cases lose about 10-13%
+because the draft's guesses are rejected more often. Thinking-off code and math are unchanged even at T=1.0 (those
+tokens are low-entropy). Prose is mixed: thinking off loses about 8% when sampled, thinking on gains slightly.
+Caveats: greedy is deterministic, so its spread is near zero, while sampled runs generate different text each time
+and the spread is the real variation; each reply is cut at 1024 tokens, so thinking-on rows measure the start of
+the reasoning trace, not a full answer; n=6 per cell.
+
 **Context:** 131072 tokens with Q8 KV. Peak VRAM 22.45 GiB with a 122k-token prompt; a needle-in-a-haystack
 question at 122k was answered correctly ([`bench/needle.py`](bench/needle.py)). 192k does not fit with the
 4.00bpw weights (the port's 192k profile is for its 3.5bpw model). There is no 3-bit KV cache on ROCm yet (the

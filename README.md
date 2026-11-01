@@ -67,7 +67,7 @@ Thinking off: code 76-77% at all three, math 60-62%, prose 20-24%.
 Reading it: at the recommended T=0.6 the speed is the same as greedy within run-to-run spread (code and math thinking
 on: -0% to +6%; one run in six reached 131 on code). At T=1.0 the thinking-on code and math cases lose about 10-13%
 because the draft's guesses are rejected more often. Thinking-off code and math are unchanged even at T=1.0 (those
-tokens are low-entropy). Prose is mixed: thinking off loses about 8% when sampled, thinking on gains slightly.
+tokens are low-entropy). Prose is mixed: thinking off loses about 8% when sampled, thinking on gains about 10%.
 Caveats: greedy is deterministic, so its spread is near zero, while sampled runs generate different text each time
 and the spread is the real variation; each reply is cut at 1024 tokens, so thinking-on rows measure the start of
 the reasoning trace, not a full answer; n=6 per cell.

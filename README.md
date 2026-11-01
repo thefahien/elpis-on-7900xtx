@@ -93,6 +93,22 @@ gap: thinking-on 1.3-1.6x on code and math (1.1-1.3x on prose), thinking-off 1.8
 table's llama.cpp column (78 / 74 / 65 etc.) was a separate 512-token run on a different GGUF, so it differs by a few
 tok/s from this one.
 
+**Sampled decoding only (no greedy), elpis vs llama.cpp:** the same data as the two tables above, reduced to the
+non-greedy settings (top_p 0.95, top_k 20), median tok/s of 6 rounds, 1024-token replies, 7900 XTX. llama.cpp is the
+Swift-1.5 IQ3_S model, so this is "what the card did before", not a strict A/B.
+
+| tok/s | elpis T=0.6 | elpis T=1.0 | llama.cpp T=0.6 | llama.cpp T=1.0 |
+|---|---|---|---|---|
+| code, thinking on | 113 | 96 | 74 | 74 |
+| math, thinking on | 114 | 99 | 74 | 72 |
+| prose, thinking on | 86 | 85 | 69 | 67 |
+| code, thinking off | 181 | 179 | 87 | 85 |
+| math, thinking off | 152 | 149 | 83 | 81 |
+| prose, thinking off | 70 | 69 | 63 | 60 |
+
+Sampling at T=0.6 costs elpis nothing against greedy; at T=1.0 thinking-on code and math lose about 10-13%.
+llama.cpp barely moves. Speed only: quality under sampling was not measured.
+
 **Context:** 131072 tokens with Q8 KV. Peak VRAM 22.45 GiB with a 122k-token prompt; a needle-in-a-haystack
 question at 122k was answered correctly ([`bench/needle.py`](bench/needle.py)). 192k does not fit with the
 4.00bpw weights (the port's 192k profile is for its 3.5bpw model). There is no 3-bit KV cache on ROCm yet (the
